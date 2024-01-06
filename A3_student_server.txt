@@ -1,0 +1,17 @@
+----------------------------------------
+Start of task1 Testing
+
+stp(server): socket created
+stp(server): bound to ('localhost', 6330)
+stp(server): listening ...
+
+stp(server): accepted client connection #1
+
+End of task1 Testing
+----------------------------------------
+stp(server): socket closed
+
+stp(server): accepted client connection #2
+stp(server): socket closed
+
+stp(server): socket closed

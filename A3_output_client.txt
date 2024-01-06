@@ -1,0 +1,136 @@
+----------------------------------------
+Start of task1 Testing
+
+stp(client): socket created
+stp(client): encrypting: MluVHtb5shoy7YN
+stp(client): sent: b'fsB\xac\x8ck\xb4]\xad}\x9a0\x91]CL\x18\x8d\xde\rn\x16\xb0\xdfIGZ\xcf#}c \xc1g\xe1\x9a?\xbd\xa2oZ0!`\x90T\xfc\xe5\xb7-\xf3\xf7SE\xf6i\xa0p\xaf\x07!C\x87\x14^\xc3\xe1i]Ff\x8c{\x9e/\x99\xce3\xd1eX\x9d\x1d\x9d9|~\xec\xe1;\xc3\xa6\x7fT\xf99\xda\xb8\x9e)\xbaQ}b]{\xcaN\xcdfN&@0iR\x1a\xa1\xd5\xa5M\xa4\xc5\xc5\x07\xce\x0c\t'
+stp(client): received: b'<user_denied>'
+stp(client): connection shutdown
+stp(client): socket closed
+
+stp(client): socket created
+stp(client): encrypting: ZluUHtb7xmoy7YR
+stp(client): sent: b'\x1d%Cj\xb5\x16\xc1\xc3\x1a`d\xb3K\xc3\xb3*\xc28\xc0$\x80\xcd\xfe\x0eyw\xfc\x91\xaa\x00")r\xb3l\xcb\x13\xf2\x87\xa7I-H1\x93\xa5\xd3\xe86\'\x18\xa4\xbfi\x90\xf2\xc2\xce\xc16\xccc\t\xc1\x03\xb6ze\x18\xebS\xe6\xfa1\xf5x\xc0)\xf1\x96\n\x89jr)"\xe2\x08\x11\t\xb1\xe4\x14\xf0\xaf]>\xee\x16QS\xf1N\xe6\xee?b\x0cb\xae\xb3@l\xec\xcb\xc3\xaf4\xdb|\x89CT\xad\x98>@\xc4'
+stp(client): received: b'<user_denied>'
+stp(client): connection shutdown
+stp(client): socket closed
+
+End of task1 Testing
+----------------------------------------
+----------------------------------------
+Start of task2 Testing
+
+stp(client): socket created
+stp(client): encrypting: ZluVHtb5xho27YR
+stp(client): sent: b'@\x01(\x96\xdb\xd3_\xba\x96d\x9f\xe8o\xa7?\x9e\xdeU\x8f\x03\x14m\x13\xa5\xe3 P\xd9=\xfc\r\x94=\xda\xd8\xf6X\xb5\xb8\x855\x99#,\xbd]\xf8r\xcf\xf2]\x7f\xeb{\xa4}\x15\x18\xf5\x08v\x036\x9f\x93\xcd~\xc7g\xa9t\xc3\xd7\xcb\xc3-8\x04zd\\sW-\xfb\xd4@#o\xa2\xdb\xdb\xfdS\xee\nE\xe4i*1\x11\xc3\xc6]\xca{Mzx\xff\xba\xa0\xfcH\x10\xd2DPKj\xb7\xd6\x134[\xc5\\'
+stp(client): received: b'<user_authen>'
+stp(client): encrypting: b'FNbuSJ30yFe7YuV0xw9CNH7gKkXNrYBtWToKF8gSY6E='
+stp(client): sent: b"\x0fyKk\xf9\x04\xbc\x9fw\x01x\x9e\x95\xc5\xd2HhMd\x08-\xe0\x82\xfcr\x8f\xbe?<\x06\xd2\xcd\xdeY\xfe\x10|\r\x94\xe6\x9b\xbdet*\xc2H\xdf'\xbd9._U\xe3(r{t9\x19\xe2\xed@~aoN2\x1b\x8c5\x08\x1e\xe8\xef}\xb8\xe2\xb2\xcd0\x9d3^E\xd0\xdfx\x83\xfa-\xd4\xe3\xc4\xe7\xb1\x84\xe98\xe9Zn:\xaaKi\xdbqf\x9d\xb7\xf9\x8e\xd9\x1d\xb8\x06\x9a\xae\xef8\xed\xa5\xa6\xce\x9a\xda"
+stp(client): received: b'gAAAAABlldj6G-6URn1Z1sFtG7IlQjAwelF16z64v50HUe0yNG8S4s5tcnEzn2qw3YBPyVAZKP4OqKkTcl_qzH1ShZNbJWyeCw=='
+stp(client): decrypted: b'<key_received>'
+stp(client): encrypting: tricky!
+stp(client): sent: b'gAAAAABlldj6JtvH3Sz8C4lYsIy8NicjWbcZkz1q1l5HniEagxso1zc4KxdSBycWXF7mMhAALnYQn9UfRVX5_Zob1wG0GSpMBQ=='
+stp(client): encrypting: <config_done>
+stp(client): sent: b'gAAAAABlldj6LRnjFKP0bv74QRL0rJTOa8RPA5mrGHCYQEEUBIqbLOIzsLvg-HHBKMkPH63k3QeDjdCh99TqAgedAblMxgaLhg=='
+stp(client): received: gAAAAABlldj6t-UDR03dUtJpJRdgDfxPtEshu8IU0Uw8gPRWKGgiN7rVEpYiHiab9srXbECrVxW589lWh1ukVID2FXqDy3ixbA==
+stp(client): decrypted: b'#10:BAD_CMD#'
+stp(client): connection shutdown
+stp(client): socket closed
+
+stp(client): socket created
+stp(client): encrypting: YnM6W2STH8JuFs2
+stp(client): sent: b"\xa1\xdd\x19\xdb\x9dQ\xcea&\x96\xfd\xfa-\xcc\xad\xbb\xa2j\xd2\x83qTR\xd2G\xfe3`\xf8\xa0\xcc\r\xba\x9c\x8f\x8dIg9@\x0b\xbc\xddK\x01p\xb0\x16 Y\xac5x!\x0e\x81j~D\xf1\xcb\xb8CS\xdaL\xa2\x9c\x1f\xf8\xe3\x1c\xb0\x08\xb8P\xfe<*\xe2=)t\xfd\xda\x03\x00\x0f\xce~j\xbc~\xc5Cp%\xc7\x96 \t\xff\x94\xa7'\xb91\x19\x90\xf4BW\xcf\xa2\xb0KB\xbe\xc5NCo\xceS\xe8\x92 v"
+stp(client): received: b'<user_authen>'
+stp(client): encrypting: b'Tlt3p9fwDt90JOPsze8IASb49iJxAn7EFqbsfjMMC1c='
+stp(client): sent: b'\x0e\xf7\n=\xb7\x90q\x0cGq\xce\x89B\x84\xdd\xf8\xa2v=V\xc3\xe0\x05\x1b\xd4gQ\x84\xb5\xf9\xa8\xc5U\x97 \xaa{\xd1\x8bT;Cgh@B;\xac\x94\xe5\xb9\x06aK\xa9\xc9\x9e\x88`\xb1Br\x1c\xc6\xe2}\x9d\xad\x04-1\xfeoeh\xe1oa\xfe\xf9)r\xb6*\xe7\xe2\x98\xe7\xa3\x80\n\xe4za\xa4\xa7Qi1hr\xba\xa8\xbf\x8e&\xf6\xef0\xe4c1\xe7\xf8\x8c\x19`\x91E\x08A\xe3hN\xe0\nV\x19'
+stp(client): received: b'gAAAAABlldj7XGGW-jVVoEjuEZpwTCCk_6a5EGX8mBB6ujvjf-DcBrEd_19GQSGFrmKmptMQuLhv9_9eV3o41iMrxToKU5Ezvw=='
+stp(client): decrypted: b'<key_received>'
+stp(client): encrypting: $type:pic$
+stp(client): sent: b'gAAAAABlldj75G6xqtoOkTh5NA4xN_xSSjSe3NXgv4seV5PCJxwBEEQvNsYRuRmyNsu66zhm27DlGMxZdQyAaL6wf9dktRnC_Q=='
+stp(client): encrypting: (size:6501)
+stp(client): sent: b'gAAAAABlldj7sViQxn00OWBncht4peBf_YiswehpHT3SYv_iNpL-Z5_5SvmnP8reEtJXv0nW_W6tnR9ka0XkRzlblK5TPG6sSg=='
+stp(client): encrypting: $name:t2.txt$
+stp(client): sent: b'gAAAAABlldj77OloyU8xz5s1oHTPvd0QuAdBu4iLiqBIVCXK-PTzxJK9s-91NdksCbCGG53GIlcRY9wuFtMds4i3nU9glERGIg=='
+stp(client): encrypting: <config_done>
+stp(client): sent: b'gAAAAABlldj7XTVgjwa84XYtS2zBoIz7y4zduqFApGtiTuKuEAwMRVvIKYOMq8pmdgsTP-Km_4BUqlZef7cXBEcSuA1ibPVCgA=='
+stp(client): received: gAAAAABlldj7KGXHVFhfDyYJC6retYaYHZEUBRjpnfIEw5hu5f0MzlLUjVR82Ee4mloamMIRal1xcRoD_uUluNRCcA_Shf9sDw==
+stp(client): decrypted: b'#10:BAD_CMD#'
+stp(client): connection shutdown
+stp(client): socket closed
+
+stp(client): socket created
+stp(client): encrypting: GcD3VxLSBF9ZRNR
+stp(client): sent: b"\r\x9alX\x86E\x9a\x00\x0f\xf7@f\xd4'2\rJ\x9d\x92\xce\xf4t\x93{\xc7\xbeNRh\xe0C\xf3\x99\xe0@.\xe0\x1fQ;&\x99sw\xab%I\xd8\xc4s\xf26\xb8d\xa2\x10\xef\x1eh\xc6\xe7\x92\xea\x05-X{\xf6q\xfc\xa3\xd3\xcaq_5\x90\x13V-\x18c\xaf\x03bB(\x11A\xaa\xedWB\xf5\x99\x07$\x11\xabS\t\xde\xf6\xd2D\xc12dy\x9a\xaa\x95\x12\x9f\xbb\xe7V\x0c\x82\xcd>\x8bS\x97\x10Ph\xb0"
+stp(client): received: b'<user_authen>'
+stp(client): encrypting: b'tVMIOt5h-ArjEnUMhdUQ4TjXGKYc-p5S7HKzNGkfkQo='
+stp(client): sent: b"\xb2 \x93\x1a\x02\x02$\xb4\x07\xd9\xf3;,\xc0a\xa0Cg\xadN\xa27\xc68\xe3\x92\x97\x0cq\x85b\xa6tK\x0c\xd5\xcb_\xffp[\xe8*\xcaL\xf5\x96\x1bJ\xcd\xce\xa6U\xebU\xe2\xc4\xeaZ\xd0:\xbaMYU\xb3\xd2\xe8\x07\x7f3\xbe\xa5v.7\x06\x9f\xdaaS\xee*\xe8\xa3\xfc\xd9\x995\x98a_\x84{Wb\x11='\xa5+\x01\xc4H\x05C\xbb\xcd\x87\xb4\xf8\x0ek\xb6\x9d\xc8\xf59a7\x93\xb5u\x15\x8c\x89\xaf\xce"
+stp(client): received: b'gAAAAABlldj8TPKrNmSy0LSvymAb71nSKjLmUTdksjLE6sYoVpdEaYZLvB1p_Ia1tgDiLn-FweGlY35hsyZMAntbMQIMCgbZsw=='
+stp(client): decrypted: b'<key_received>'
+stp(client): encrypting: $size:-4$
+stp(client): sent: b'gAAAAABlldj8H0dcIusKRcbepCV79EJDO7gEAX1oPxF2Q-g6hz-PdbnEi94oKQ_W3x7XMZVnkVEQE8ySJt8hC7MPNKp5CuS6ag=='
+stp(client): encrypting: $name:f2.pdf$
+stp(client): sent: b'gAAAAABlldj80MIppNbl9PE6uvjkYo5mr5RUDkPV_ikSBV8E0pRfBkwo0Pp1QXdva1ewNTrRvpJroIl_SxTFvbul05tLwtS7zA=='
+stp(client): encrypting: $type:text$
+stp(client): sent: b'gAAAAABlldj8njLCBv0_j8nXp0WpUX7ilDnEVKiP6WoKq44sI3lN-y8TjdMLsOceGmn873lCdUkq5VO3-uqMhFHxPB-Q1bSH8g=='
+stp(client): encrypting: <config_done>
+stp(client): sent: b'gAAAAABlldj8UNM68mwNQNNKuvUkaCLjFf1cpJ5bb60C8sNddvo2PlnaIes4BwfTpVFhqjxKjVDsrlw8wS0j1DYDpaTEQ6w4ug=='
+stp(client): received: gAAAAABlldj8uddP7RfJx9vWXarnesByKV-E7DyD4YGE3kqp0EMv3d_U9zZWGTQ6aDEzwa-wnU2r7x96oJnRCK65dgL5GSrHEA==
+stp(client): decrypted: b'#30:BAD_CONFIG#'
+stp(client): connection shutdown
+stp(client): socket closed
+
+stp(client): socket created
+stp(client): encrypting: eYeix4YwJPToq6T
+stp(client): sent: b'\x90\xc4-A\xd7\x960\x16\xed\xc5\x1a\xdb\x8c0~\xe8g\xbd!J|\xd8,>\xea4\x9d\x1a-\xe9\x83\x8d\xef\xb6mm\xa7H\xe8\x16\xa4V\x17mf\x9fw\xc5\x00Z\x04k\xea\xfd\xad\x1d\xea\x91\xbf\xccm\xb78\x96&\x9e\\\x9e\xaal\x83\xd9\x07\xa8\xd4\xb3T\xe9\x99\xfc|\x87[\xe7\x07pZ0j\xe9\xd5\x0f\x83+K\xdc>\xd8\xdc\xa4\x02{\xc1\x81\xef\xd8\xe7,\x03\x02\xf0\xc4\xa1C\x88\xe5\xfc\xf2\xa3\x14\x83t\xbfP^&I\xcf'
+stp(client): received: b'<user_authen>'
+stp(client): encrypting: b'qUjuP_758hFzJzkP0CnqTegzQgvji5uDhQOvKEyBxn4='
+stp(client): sent: b'A*\x03.\x86\xa0\xf4\xbe8Kr7\x8ed\xad\xcc<U\x9eb\xc5\xd8@\xb4\xdc\xce\xb0\x1d\x10\xff,\xcaK\xce\xda\x00\x0c\x14\x16\x03.\xea2v\x89\xcbF\x1fSN\xcf\x98\xa2X\x8c\xc8\xa8\x81=\xb8\xec\xfd=b\xe5\xb4\xd0\xc4<x\xe9W\xa7=~,dI\x1d\xbfCj5\xd9\x9e{\n\x9c&\\0@B\xb4ZQih\xe9\x07[\xbc\xa6\xcc\x17v \x9aF\x1f\xa6&\xf3FL\xc2\xf7U;_P\xc86\xa7Vj\tn'
+stp(client): received: b'gAAAAABlldj9BSgvCf268YUcCeY9mMo9wD79aX30IlWl9NtnLYr-qIk7auNgVvrqDjpWMhZMy-9Va_OqTuxHdZbYWs6H9qcAbA=='
+stp(client): decrypted: b'<key_received>'
+stp(client): encrypting: $size:441$
+stp(client): sent: b'gAAAAABlldj9kxtQgL2ZTez5KSSUndLh9zuWWeXCq5KbEpIggluN-7-VTs0ElrKIAwoLJ3B4k0LkBZWLdvReLTpCRovWsde30A=='
+stp(client): encrypting: $type:text$
+stp(client): sent: b'gAAAAABlldj94fuycdRKaE7g0I87BA0GcWVZO9sVHbHgeLMzZoUGVf1UiJnhy36xvtIHNn4e-ad8nePKlXY9x3INhoNTEuuPbQ=='
+stp(client): encrypting: <config_done>
+stp(client): sent: b'gAAAAABlldj9VPfJhczBD9KTKIFGEIIvhSevuKUVzy4RKEqdaF5Lw9-jyVv2ZNdh2wVijpxq1gMyyremq312nM1g5CYXp6RR0A=='
+stp(client): received: gAAAAABlldj9ap1t3liKjX_9r2Fse7CN-KLS-CRZ_1CyYxLu7yPp-gv_kz1FGnhtonBeoqM3nVzoq8Q7yc5u4rhW3p4BwAN5EA==
+stp(client): decrypted: b'#20:CMD_MISS#'
+stp(client): connection shutdown
+stp(client): socket closed
+
+End of task2 Testing
+----------------------------------------
+----------------------------------------
+Start of task3 Testing
+
+stp(client): socket created
+stp(client): encrypting: GcD3VxLSBF9ZRNR
+stp(client): sent: b"\x89\x8b\xf5\xd0\xa1\xc5[\x8e\x86\xfc\xa5^\xa6m\xfaA\x93\xe9h\xe1\xd8\xbd\x91\nV\x1a\x0f\xeb\x9f\xbc\x18\xbc{\xf1\x14\xd6\xbe\\\xce\xd5\xcc\xee[|\xd9\xc1d4\xd4~$\x12\xe6\xb0\xc4\xc7\xfb\x92\xdfXh\xed\xde\x02\xd4\x93gOc\xc5\x8a;t\xbf\xa0m\x19v\xc4\x06$%\xb5;'a\xf4\x040\xfa#,\x8e\x13\xcb\xeaN\t\x91\xfb\xe5(\x15\x07\x14\x00\xc4\x8d\xc1\x16\xc5\x11@b<\x82\x9c:\x9c]\x16\xf8\xb2\xcfY\xacRx"
+stp(client): received: b'<user_authen>'
+stp(client): encrypting: b'FNbuSJ30yFe7YuV0xw9CNH7gKkXNrYBtWToKF8gSY6E='
+stp(client): sent: b'\x1a;\xc6\x9d\xbc\x17\xa5\xe84Q\xa6\xee\x85\xbe(a<+1@ \x95\x7f4\xc7\xd1\x86!\x01\x13A\xc3\xb9<5\x10\xaa\xb1\xaeJ.HiE}\xd2\xcf\x9fOL\x8aMlz|\xb7\x11\xe9\xcbP\xde^\x9e]S\xfd\t\xbe\xf5ki}\x83\x7f\xc6\xec\x92\x90\xdf\x9a!\x94\xb0\xa1=j\x89\x8e\x9d\xb1\x18\x89/\xee5\x01\xb9\xf6\xddqe0m0>=x\xad\x8d\xf7\xd2q\xba\xe6\t&\x18Y\xf1\xa9)\x96\xcf\xf5\xac\xb0\xe1o'
+stp(client): received: b'gAAAAABlldj-P5naefONfn60gHxHiq3ZvwiF4HiIAGfiA2r978I-atDIRKpoX4p_mqDSWvDWXRvVIZp2SiCDeJO-wE02mys8Rw=='
+stp(client): decrypted: b'<key_received>'
+stp(client): encrypting: $type:text$
+stp(client): sent: b'gAAAAABlldj-BCzdsyGIwSRvHY2r8oodlbcRpldrG3IwiZQWWK42cIayulKxXcXi2wy_MNBwOL4LnBhIXZX-8rF4tugVG2Snvg=='
+stp(client): encrypting: $size:607$
+stp(client): sent: b'gAAAAABlldj-56mqFiBU9o4XCjeg5WHjlnYpBjlOs6BpFe6uNy8QWMJ57qZz572UyklTr7eWMiozfTE0o3P84J_mI2ZYsCMwvA=='
+stp(client): encrypting: $name:t1.txt$
+stp(client): sent: b'gAAAAABlldj-pxwUZpWnovqHOn-dpFZKAduBkrzgky3PZsUk9gE3OYuabtufI3rLwJyLS5hTPCF0-Lpo-mIT0Bc1oN7roPAPJA=='
+stp(client): encrypting: <config_done>
+stp(client): sent: b'gAAAAABlldj-m9rRiSKhBgFQhL-AyM20R75jk2AjjdBXVAPjBPA4A3uxYPDqoHlRBY921pGA5KluNuUsp2Giiug2U_zxirZGeg=='
+stp(client): received: gAAAAABlldj-T5LK8VXBF9Zlg_v6pFVNl4-Bw2fiACmDgMb5J2GmgL99KLyTcCP-k2IibpCKB6zMu4VyE5s_wEHtfzDNko8oOQ==
+stp(client): decrypted: b'<config_valid>'
+stp(client): uploading ...
+stp(client): sent: b'\xa9P9\xac,\x1d\xe6\xb78\xa8\xe8\xefE\x0e\xaer'
+stp(client): sent: b'Utilitatis causa amicitia est quaesita.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Collatio igitur ista te nihil i'
+stp(client): sent: b'uvat. Honesta oratio, Socratica, Platonis etiam. Primum in nostrane potestate est, quid meminerimus? Duo Reges: constructio inte'
+stp(client): sent: b'rrete. Quid, si etiam iucunda memoria est praeteritorum malorum? Si quidem, inquit, tollerem, sed relinquo. An nisi populari fam'
+stp(client): sent: b'a?\n\nQuamquam id quidem licebit iis existimare, qui legerint. Summum a vobis bonum voluptas dicitur. At hoc in eo M. Refert tamen'
+stp(client): sent: b', quo modo. Quid sequatur, quid repugnet, vident. Iam id ipsum absurdum, maximum malum neglegi.'
+stp(client): uploading complete
+stp(client): connection shutdown
+stp(client): socket closed
+
+End of task3 Testing
+----------------------------------------
