@@ -15,6 +15,7 @@ from socket import *
 from cryptography import *
 from utilities import *
 from hashlib import *
+
 # ----------------------------------
 # I borrowed the A2 solution from myself
 
@@ -120,7 +121,7 @@ def stp_server(filename, server_address, client_count):
     Return:       -
     Used by:      Server
     Description:  Main server function.
-                  Creates a server socket, 
+                  Creates a server socket,
                   accept clients and direct to handle_client
                       writes to outfile: 'stp(server): accepted client connection <#>'
                   Serves given number of clients then close
@@ -133,13 +134,19 @@ def stp_server(filename, server_address, client_count):
 
     for n in range(client_count):
         client_socket, client_address = server_socket.accept()
-        write(filename, 'stp(server): accepted client connection #{}\n'.format(n+1))
-        handle_client(filename, client_socket)
-        close_socket(filename,client_socket, 'server')
-        write(filename, '\n')
-
-        
-    close_socket(filename,server_socket, 'server')
+        write(filename, 'stp(server): accepted client connection #{}\n'.format(n + 1))
+        try:
+            res = authenticate_client(filename, client_socket)
+            if res:
+                print('success authenticate_client')
+                handle_client(filename, client_socket)
+                close_socket(filename, client_socket, 'server')
+                write(filename, '\n')
+            else:
+                print('fails authenticate_client')
+        except:
+            print('e')
+    close_socket(filename, server_socket, 'server')
     return
 
 
@@ -170,7 +177,7 @@ def handle_client(filename, connection):
             download_success = download_file(filename, connection, commands)
             if not download_success:
                 raise Exception('stp(server): handle client error')
-        
+
     except Exception as e:
         write(filename, f'stp(server): handle client error: {e}\n')
 
@@ -322,13 +329,13 @@ def download_file(out_filename, sock, commands):
     Description:  downloads a file from the client using given configuration
                   The file contents are received as text or binary depending on file type
                   In both cases, the function receives BLOCK_SIZE bytes in each receive call
-                  If download of "filename.ext" is successful:    
+                  If download of "filename.ext" is successful:
                       Store file as: filename_copy.ext
                       write to file: 'stp(server): download complete'
                       return True
                   If there was an error in download
                       write to file: 'stp(server): receive error: <Exception>'
-                      return False   
+                      return False
                   Upon start of download write to file: 'stp(server): downloading ...'
                       write to file every received block
     ---------------------------------------------------
@@ -338,17 +345,17 @@ def download_file(out_filename, sock, commands):
         dot_index = f_name.find('.')
         write(out_filename, 'stp(server): configuration:\n')
         write(out_filename, 'stp(server): downloading ...\n')
-        
+
         if dot_index != -1:
             file_extension = f_name[dot_index + 1:]
             mode = None
-            
+
             if file_extension in TEXT_EXTENSIONS:
                 mode = 'w'
             elif file_extension in PIC_EXTENSIONS:
                 mode = 'wb'
 
-            down_file_name = '{}_copy.{}'.format(f_name[:dot_index],file_extension)
+            down_file_name = '{}_copy.{}'.format(f_name[:dot_index], file_extension)
 
             if mode is not None:
                 with open(down_file_name, mode) as file:
@@ -634,7 +641,7 @@ def get_parameter_value(commands, parameter):
 '_______________________________________________________________'
 
 
-def stp_client(out_filename, server, filename=None, commands=None, i=None):
+def stp_client(outfile, server, keys, filename=None, commands=None):
     """
     ----------------------------------------------------
     Parameters:   out_filename (str)
@@ -651,7 +658,7 @@ def stp_client(out_filename, server, filename=None, commands=None, i=None):
                   5- Receive response from server
                   6- If configuration is approved by server: upload file
                   7- close the connection and socket
-    Dependencies: prepare_socket, close_socket, connect_to_server, 
+    Dependencies: prepare_socket, close_socket, connect_to_server,
                     get_file_parameters, send_commands, get_config_response,
                     upload_file
     Errors:        The function returns in the following cases:
@@ -661,27 +668,28 @@ def stp_client(out_filename, server, filename=None, commands=None, i=None):
     Exception:    write to file: 'stp(client): Exception: <Exception>'
     ---------------------------------------------------
     """
+
     try:
-        client_sock = prepare_socket(out_filename, 'client')
-        try:
-            connect_to_server(out_filename, client_sock, server)
-            if commands is None:
-                commands = get_file_parameters(filename)
-            if len(commands) > 0:
-                result = send_commands(out_filename, client_sock, commands)
-                if result:
-                    response = get_config_response(out_filename, client_sock)
-                    if 'config_valid' in response:
-                        upload_res = upload_file(out_filename, client_sock, commands)
-
-
-        except Exception as e:
-            write(out_filename, 'stp(client): Exception: {}'.format(e))
-            close_socket(out_filename, client_sock, 'client')
-        finally:
-            close_socket(out_filename, client_sock, 'client')
+        client_sock = prepare_socket(outfile, 'client')
+        connect_to_server(outfile, client_sock, server)
+        success = login(outfile, client_sock, keys[0])
+        if success:
+            try:
+                if commands is None:
+                    commands = get_file_parameters(filename)
+                if len(commands) > 0:
+                    result = send_commands(outfile, client_sock, commands)
+                    if result:
+                        response = get_config_response(outfile, client_sock)
+                        if 'config_valid' in response:
+                            upload_res = upload_file(outfile, client_sock, commands)
+            except Exception as e:
+                write(outfile, 'stp(client): Exception1: {}'.format(e))
+                close_socket(outfile, client_sock, 'client')
+            finally:
+                close_socket(outfile, client_sock, 'client')
     except Exception as e:
-        write(out_filename, 'stp(client): Exception: {}'.format(e))
+        write(outfile, 'stp(client): Exception2: {}'.format(e))
 
 
 '____________________________________________________'
@@ -697,7 +705,7 @@ def connect_to_server(filename, sock, server, ):
     Used by:      Client
     Description:  connects given socket to the given address
                   if successful: return True
-                  if connect fails: 
+                  if connect fails:
                       close socket
                       write to file: stp(client): connect fatal error
                       return False
@@ -729,7 +737,7 @@ def send_commands(filename, sock, commands):
                   each command is sent using a separate send operation
                   write to file each sent command
                   When done send: '<config_done>' and return True
-                  if sending fails: 
+                  if sending fails:
                       write to file: 'stp(client): send operation failed'
                       return False
     ---------------------------------------------------
@@ -737,6 +745,7 @@ def send_commands(filename, sock, commands):
     try:
 
         for command in commands:
+            write('stp(client): encrypting: {}'.format(command[0]))
             sock.sendall(command.encode(ENCODING))
             write(filename, 'stp(client): sent: {}\n'.format(command))
         # print('client sent all commands')
@@ -762,7 +771,7 @@ def get_config_response(filename, sock):
     Return:       response (str)
     Used by:      Client
     Description:  receives the server response to the sent commands
-                  if successful: 
+                  if successful:
                       write to file: 'stp(client): received: <msg>'
                       return response message
                   if failed: write to outfile:
@@ -814,12 +823,12 @@ def upload_file(out_filename, sock, commands):
         if dot_index != -1:
             file_extension = f_name[dot_index + 1:]
             mode = None
-            
+
             if file_extension in TEXT_EXTENSIONS:
                 mode = 'r'
             elif file_extension in PIC_EXTENSIONS:
                 mode = 'rb'
-            
+
             if mode is not None:
                 with open(f_name, mode) as file:
                     while True:
@@ -857,13 +866,45 @@ def upload_file(out_filename, sock, commands):
 
 '____________________________________________________'
 
+def login(outfile, client_socket,login_password):
+    rsa_key = RSA.load_key('server', 'public')
+    write(outfile, 'stp(client): encrypting: {}\n'.format(login_password))
+    token = RSA.encrypt(rsa_key, login_password)
+    client_socket.sendall(token)
+    write(outfile, 'stp(client): sent: {}'.format(login_password))
+    try:
+        data = client_socket.recv(BUFFER)
+        print(data)
+    except Exception as e:
+        print(e)
+    return False
+
+def authenticate_client(outfile, connection):
+    exist = False
+    try:
+        data = connection.recv(BUFFER)
+        write(outfile, 'stp(server): received: {}'.format(str(data)))
+        rsa_key = RSA.load_key('server', 'private')
+        log_pass = RSA.decrypt(rsa_key, data)
+        hash_val = Password.hash_password(log_pass)
+        combin_hash = hash_val[0]+hash_val[1]
+        with open('passwords.pwl', 'r') as file:
+            lines = file.readlines()
+            for line in lines:
+                if combin_hash == line.strip():
+                    exist = True
+
+    except Exception as e:
+        print(e)
+    finally:
+        return exist
 
 def valid_filename(filename):
     """
     ----------------------------------------------------
     Parameters:   filename (str)
     Return:       True/False
-    Description:  Checks if given input is a valid filename 
+    Description:  Checks if given input is a valid filename
                   a filename should have at least 3 characters
                   and contains a single dot that is not the first or last character
     ---------------------------------------------------

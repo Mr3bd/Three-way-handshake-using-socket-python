@@ -6,12 +6,4 @@ stp(server): bound to ('localhost', 6330)
 stp(server): listening ...
 
 stp(server): accepted client connection #1
-
-End of task1 Testing
-----------------------------------------
-stp(server): socket closed
-
-stp(server): accepted client connection #2
-stp(server): socket closed
-
-stp(server): socket closed
+stp(server): received: b"\x06\x13\xe2\xe0\xc7\x91\x9a\xc6*\xdb\x05\xda\xc9\n\n}\xf2\xe8\x0c\xa61.\x9a\x0ek\xa6\xc5\xb3'W[\x1aj\xad,r\xf3,\x9d\xa9\xd9^b\x9c\x92\rI2C\x1a ge\xef\x9a\xf2\x05\xbfh0\xa9\xf4\xc6\x07"

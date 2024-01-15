@@ -2,12 +2,5 @@
 Start of task1 Testing
 
 stp(client): socket created
-stp(client): Exception: 'tuple' object has no attribute 'rfind'stp(client): connection shutdown
-stp(client): socket closed
-
-stp(client): socket created
-stp(client): Exception: 'tuple' object has no attribute 'rfind'stp(client): connection shutdown
-stp(client): socket closed
-
-End of task1 Testing
-----------------------------------------
+stp(client): encrypting: MluVHtb5shoy7YN
+stp(client): sent: MluVHtb5shoy7YN
