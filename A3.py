@@ -13,13 +13,13 @@
 # ----------------------------------
 from socket import *
 from cryptography import *
-from utilities import *
+import utilities
 from hashlib import *
 
 # ----------------------------------
 # I borrowed the A2 solution from myself
 
-BUFFER = 64  # receive buffer for commands
+BUFFER = 128  # receive buffer for commands
 ENCODING = 'utf-8'  # encoding used by both ends
 SERVER_ADDRESS = ('localhost', 6330)  # server socket address
 BACKLOG = 6  # listen backlog
@@ -138,12 +138,31 @@ def stp_server(filename, server_address, client_count):
         try:
             res = authenticate_client(filename, client_socket)
             if res:
-                print('success authenticate_client')
-                handle_client(filename, client_socket)
-                close_socket(filename, client_socket, 'server')
-                write(filename, '\n')
+                try:
+                    data = client_socket.recv(BUFFER)
+                    write(filename, 'stp(server): received: {}'.format(str(data)))
+
+                    rsa_key = utilities.RSA.load_key('server', 'private')
+                    symm_key = utilities.RSA.decrypt(rsa_key, data)
+                    write(filename, 'stp(server): decrypted: {}'.format(symm_key))
+                    msg = '<key_received>'
+                    encrypted_msg = utilities.RSA.encrypt(symm_key, msg)
+                    write(filename, 'stp(server): encrypting: {}'.format(msg))
+
+                    client_socket.sendall(encrypted_msg)
+                    write(filename, 'stp(server): sent: {}'.format(encrypted_msg))
+
+                    handle_client(filename, client_socket, symm_key)
+                    close_socket(filename, client_socket, 'server')
+                    write(filename, '\n')
+                except:
+                    client_socket.shutdown(SHUT_RDWR)
+                    client_socket.close()
+                    write(filename, 'stp(server): socket closed\n\n')
             else:
-                print('fails authenticate_client')
+                client_socket.shutdown(SHUT_RDWR)
+                client_socket.close()
+                write(filename, 'stp(server): socket closed\n\n')
         except:
             print('e')
     close_socket(filename, server_socket, 'server')
@@ -153,7 +172,7 @@ def stp_server(filename, server_address, client_count):
 '_______________________________________________________________'
 
 
-def handle_client(filename, connection):
+def handle_client(filename, connection, symm_key):
     """
     ----------------------------------------------------
     Parameters:   filename (str)
@@ -187,7 +206,7 @@ def handle_client(filename, connection):
 '_______________________________________________________________'
 
 
-def receive_commands(filename, connection):
+def receive_commands(outfile, connection, symm_key):
     """
     ----------------------------------------------------
     Parameters:   filename (str)
@@ -215,13 +234,13 @@ def receive_commands(filename, connection):
             received_commands += data
             if '<config_done>' in received_commands:
                 break
-        write(filename, 'stp(server): received: {}\n'.format(received_commands))
+        write(outfile, 'stp(server): received: {}\n'.format(received_commands))
         string_to_check = received_commands.replace('<config_done>', "")
         tup = validate_configuration(string_to_check)
         res = tup[0]
         # print(res)
         connection.sendall(res.encode(ENCODING))
-        write(filename, 'stp(server): sent: {}\n'.format(res))
+        write(outfile, 'stp(server): sent: {}\n'.format(res))
         res_copy = res
         com_copy = received_commands
 
@@ -674,26 +693,50 @@ def stp_client(outfile, server, keys, filename=None, commands=None):
         connect_to_server(outfile, client_sock, server)
         success = login(outfile, client_sock, keys[0])
         if success:
-            try:
-                if commands is None:
-                    commands = get_file_parameters(filename)
-                if len(commands) > 0:
-                    result = send_commands(outfile, client_sock, commands)
-                    if result:
-                        response = get_config_response(outfile, client_sock)
-                        if 'config_valid' in response:
-                            upload_res = upload_file(outfile, client_sock, commands)
-            except Exception as e:
-                write(outfile, 'stp(client): Exception1: {}'.format(e))
+            symm_res = send_symm_key(outfile, client_sock, keys[1])
+            if symm_res:
+                try:
+                    if commands is None:
+                        commands = get_file_parameters(filename)
+                    if len(commands) > 0:
+                        result = send_commands(outfile, client_sock, commands, keys[1])
+                        if result:
+                            response = get_config_response(outfile, client_sock, keys[1])
+                            if 'config_valid' in response:
+                                upload_res = upload_file(outfile, client_sock, commands)
+                except Exception as e:
+                    close_socket(outfile, client_sock, 'client')
+            else:
                 close_socket(outfile, client_sock, 'client')
-            finally:
-                close_socket(outfile, client_sock, 'client')
+        else:
+            close_socket(outfile, client_sock, 'client')
     except Exception as e:
         write(outfile, 'stp(client): Exception2: {}'.format(e))
 
 
 '____________________________________________________'
 
+def send_symm_key(outfile, client_socket,symm_key):
+    rsa_key = utilities.RSA.load_key('server', 'public')
+    write(outfile, 'stp(client): encrypting: {}\n'.format(symm_key))
+    token = utilities.RSA.encrypt(rsa_key, symm_key)
+    client_socket.sendall(token)
+    write(outfile, 'stp(client): sent: {}\n'.format(token))
+    result = False
+    while True:
+        try:
+            data = client_socket.recv(BUFFER)
+            msg = utilities.RSA.decrypt(symm_key, data)
+
+            write(outfile, 'stp(client): received: {}\n'.format(msg))
+            if msg == '<key_received>':
+                result = True
+                break
+            else:
+                break
+        except Exception as e:
+            pass
+    return result
 
 def connect_to_server(filename, sock, server, ):
     """
@@ -725,7 +768,7 @@ def connect_to_server(filename, sock, server, ):
 '____________________________________________________'
 
 
-def send_commands(filename, sock, commands):
+def send_commands(outfile, client_socket, commands, symm_key):
     """
     ----------------------------------------------------
     Parameters:   filename (str)
@@ -743,27 +786,25 @@ def send_commands(filename, sock, commands):
     ---------------------------------------------------
     """
     try:
-
         for command in commands:
-            write('stp(client): encrypting: {}'.format(command[0]))
-            sock.sendall(command.encode(ENCODING))
-            write(filename, 'stp(client): sent: {}\n'.format(command))
+            client_socket.sendall(command.encode(ENCODING))
+            write(outfile, 'stp(client): sent: {}\n'.format(command))
         # print('client sent all commands')
         completion_command = '<config_done>'
-        sock.sendall(completion_command.encode(ENCODING))
-        write(filename, 'stp(client): sent: {}\n'.format(completion_command))
+        client_socket.sendall(completion_command.encode(ENCODING))
+        write(outfile, 'stp(client): sent: {}\n'.format(completion_command))
 
         return True
 
     except:
-        write(filename, 'stp(client): send operation failed')
+        write(outfile, 'stp(client): send operation failed')
         return False
 
 
 '____________________________________________________'
 
 
-def get_config_response(filename, sock):
+def get_config_response(outfile, sock , symm_key):
     """
     ----------------------------------------------------
     Parameters:   filename (str)
@@ -783,11 +824,11 @@ def get_config_response(filename, sock):
         # print('wait to get response from server')
         response = sock.recv(BUFFER).decode(ENCODING)
         # print('received response from server: {}'.format(response))
-        write(filename, 'stp(client): received: {}\n'.format(response))
+        write(outfile, 'stp(client): received: {}\n'.format(response))
         return response
 
     except Exception as e:
-        write(filename, f'stp(client): configuration receive error: {e}\n')
+        write(outfile, f'stp(client): configuration receive error: {e}\n')
         # ('response from server is empty')
         return ''
 
@@ -847,7 +888,6 @@ def upload_file(out_filename, sock, commands):
                                 sock.sendall(trimmed_block)
                                 write(out_filename, 'stp(client): sent: {}\n'.format(str(trimmed_block)))
 
-
             else:
                 write(out_filename, 'stp(client): uploading failed\n')
                 return False
@@ -867,37 +907,58 @@ def upload_file(out_filename, sock, commands):
 '____________________________________________________'
 
 def login(outfile, client_socket,login_password):
-    rsa_key = RSA.load_key('server', 'public')
+    rsa_key = utilities.RSA.load_key('server', 'public')
     write(outfile, 'stp(client): encrypting: {}\n'.format(login_password))
-    token = RSA.encrypt(rsa_key, login_password)
+    token = utilities.RSA.encrypt(rsa_key, login_password)
     client_socket.sendall(token)
-    write(outfile, 'stp(client): sent: {}'.format(login_password))
-    try:
-        data = client_socket.recv(BUFFER)
-        print(data)
-    except Exception as e:
-        print(e)
-    return False
+    write(outfile, 'stp(client): sent: {}\n'.format(token))
+    result = False
+    while True:
+        try:
+            data = client_socket.recv(BUFFER)
+            msg = data.decode(ENCODING)
+            write(outfile, 'stp(client): received: {}\n'.format(msg))
+            if msg == '<user_authen>':
+                result = True
+                break
+            else:
+                break
+        except Exception as e:
+            pass
+    return result
 
 def authenticate_client(outfile, connection):
-    exist = False
     try:
         data = connection.recv(BUFFER)
         write(outfile, 'stp(server): received: {}'.format(str(data)))
-        rsa_key = RSA.load_key('server', 'private')
-        log_pass = RSA.decrypt(rsa_key, data)
-        hash_val = Password.hash_password(log_pass)
-        combin_hash = hash_val[0]+hash_val[1]
-        with open('passwords.pwl', 'r') as file:
-            lines = file.readlines()
-            for line in lines:
-                if combin_hash == line.strip():
-                    exist = True
+        rsa_key = utilities.RSA.load_key('server', 'private')
+        password = utilities.RSA.decrypt(rsa_key, data)
 
+        with open('passwords.pwl', 'rb') as password_file:
+            while True:
+                block = password_file.read(48)
+                if not block:
+                    out_msg = '<user_denied>'
+                    connection.send(out_msg.encode())
+                    write(outfile, 'stp(server): sent: <user_denied>\n')
+                    break
+
+                password_hash = block[:32]
+                password_salt = block[32:]
+                login_pass, salt = utilities.Password.hash_password(password, password_salt)
+
+                if password_hash == login_pass:
+                    out_msg = '<user_authen>'
+                    connection.send(out_msg.encode())
+                    write(outfile, 'stp(server): sent: <user_authen>\n')
+                    return True
+        out_msg = '<user_denied>'
+        connection.send(out_msg.encode())
+        write(outfile, 'stp(server): sent: <user_denied>\n')
+        return False
     except Exception as e:
         print(e)
-    finally:
-        return exist
+        return False
 
 def valid_filename(filename):
     """

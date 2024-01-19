@@ -159,12 +159,12 @@ def main():
     except Exception as e1:
         print('Unhandled exception in task1: {}'.format(e1))
     
-    # try:
-    #     print('Task 2 Testing started')
-    #     task2()
-    #     print('Task 2 Testing ended')
-    # except Exception as e2:
-    #     print('Unhandled exception in task2: {}'.format(e2))
+    try:
+        print('Task 2 Testing started')
+        task2()
+        print('Task 2 Testing ended')
+    except Exception as e2:
+        print('Unhandled exception in task2: {}'.format(e2))
     
     # try:
     #     print('Task 3 Testing started')     
