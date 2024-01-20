@@ -152,7 +152,7 @@ def stp_server(filename, server_address, client_count):
                 client_socket.close()
                 write(filename, 'stp(server): socket closed\n\n')
         except:
-            print('e')
+            pass
     close_socket(filename, server_socket, 'server')
     return
 
@@ -225,15 +225,15 @@ def receive_commands(outfile, connection, symm_key):
             received_commands += msg.decode(ENCODING)
             if '<config_done>' in received_commands:
                 break
-        write(outfile, 'stp(server): received: {}\n'.format(received_commands))
+        # write(outfile, 'stp(server): received: {}\n'.format(received_commands))
         string_to_check = received_commands.replace('<config_done>', "")
         tup = validate_configuration(string_to_check)
         res = tup[0]
 
         encrypted_msg = key.encrypt(res.encode(ENCODING))
-        write(outfile, 'stp(client): encrypting: {}\n'.format(res))
+        write(outfile, 'stp(server): encrypting: {}\n'.format(res))
         connection.sendall(encrypted_msg)
-        write(outfile, 'stp(client): sent: {}\n'.format(encrypted_msg))
+        write(outfile, 'stp(server): sent: {}\n'.format(encrypted_msg))
         res_copy = res
         com_copy = received_commands
 
@@ -356,8 +356,9 @@ def download_file(out_filename, sock, commands):
         f_name = get_parameter_value(commands.replace('<config_done>', ""), 'name')
         dot_index = f_name.find('.')
         write(out_filename, 'stp(server): configuration:\n')
+        f_hash = sock.recv(BUFFER)
         write(out_filename, 'stp(server): downloading ...\n')
-
+        write(out_filename, 'stp(server): received: {}\n'.format(f_hash))
         if dot_index != -1:
             file_extension = f_name[dot_index + 1:]
             mode = None
@@ -388,8 +389,11 @@ def download_file(out_filename, sock, commands):
             else:
                 write(out_filename, 'stp(server): receive error\n')
                 return False
-
         write(out_filename, 'stp(server): download complete\n')
+        hash_digest = compute_file_hash(f_name)
+        write(out_filename, 'stp(server): computed hash = {}\n'.format(hash_digest))
+        if hash_digest == f_hash:
+            write(out_filename, 'stp(server): file integrity verified\n')
         return True
 
     except Exception as e:
@@ -697,8 +701,12 @@ def stp_client(outfile, server, keys, filename=None, commands=None):
                             response = get_config_response(outfile, client_sock, keys[1])
                             if 'config_valid' in response:
                                 upload_res = upload_file(outfile, client_sock, commands)
+
                 except Exception as e:
                     close_socket(outfile, client_sock, 'client')
+                finally:
+                    close_socket(outfile, client_sock, 'client')
+
             else:
                 close_socket(outfile, client_sock, 'client')
         else:
@@ -840,7 +848,6 @@ def get_config_response(outfile, sock, symm_key):
         write(outfile, 'stp(client): received: {}\n'.format(str(response)))
         msg = key.decrypt(response)
         write(outfile, 'stp(client): decrypted: {}\n'.format(msg))
-        print(msg.decode(ENCODING))
         return msg.decode(ENCODING)
 
     except Exception as e:
@@ -873,12 +880,12 @@ def upload_file(out_filename, sock, commands):
     """
 
     f_name = get_parameter_value(commands, 'name')
-    print(f_name)
     try:
         hash_digest = compute_file_hash(f_name)
-        print(hash_digest)
-        write(out_filename, 'stp(client): uploading ...\n')
 
+        sock.sendall(hash_digest)
+        write(out_filename, 'stp(client): uploading ...\n')
+        write(out_filename, 'stp(client): sent: {}\n'.format(hash_digest))
         dot_index = f_name.rfind(".")
         if dot_index != -1:
             file_extension = f_name[dot_index + 1:]
@@ -976,7 +983,6 @@ def authenticate_client(outfile, connection):
         # write(outfile, 'stp(server): sent: {}\n'.format(out_msg))
         return False
     except Exception as e:
-        print(e)
         return False
 
 def valid_filename(filename):

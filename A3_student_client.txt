@@ -2,49 +2,135 @@
 Start of task1 Testing
 
 stp(client): socket created
-stp(client): connect fatal error
-stp(client): socket closed
 stp(client): encrypting: MluVHtb5shoy7YN
-stp(client): Exception2: [Errno 9] Bad file descriptor
-stp(client): socket created
-stp(client): connect fatal error
+stp(client): sent: b'\xa9z\xe3<\rV\xa4g\x19\x1b\xaeK\xa0\x18((\x94y\xf4\xab\x1c*\x1d`\xe9\x94\xbf\x1cJ\xaf\x89/\x96{P\x9e\xb3M\xe0\x0cB\x93\xa7A=/\xb9\xfd\x8c,\n\xb2\xd1\x0e\x08\xb3X\x87\xcf\xac\x07\x1eHmLyb\xdd\x08j\xc5\xc5\xa2\xfb\xf7\xc5\x06q\xa0\x93A6\x03M\x1d\xd8j\xee\n\x16\x11wBee\xce\xc4pPwL\xe3\xd0\xfa!\xd3\xaeds\xf7\x0f\x1a#\xb97FY\xc5Z|/\x19y\xe4\xd23\x19\x8e'
+stp(client): received: b'<user_denied>'
+stp(client): connection shutdown
 stp(client): socket closed
+
+stp(client): socket created
 stp(client): encrypting: ZluUHtb7xmoy7YR
-stp(client): Exception2: [Errno 9] Bad file descriptor
+stp(client): sent: b'1W\xb4OR{B\xca\x81\xb8\x1d\xf8\xf7<\x94\xa0\xee\x91q\n\x95\x9e\x9d\x82\x1brI+\xea%\xb0\x84a\xa2)\xa8\x95\xea\x88[\x94\x0c\\\x8f\n\x1f*8l\x89\x07\xee\xe4\xb0\xac\xf9\xf5\x81\xfa\x9e\xaa\xa0\xc4?<Gt?\x9c#I\x97\x1eq\xf2\xc3=z\xb0\xa6h\x9e\x8e\xe1\x9aQ\xc5d\xb0\xcc\xec\xda4l\x9d\xdf\xdc\xd4\xf1\xb9\xc5\xacK:r\x82\xee\xbe\x10w\x03\x83\xa0k\x9e\x1c\xc0 \xf4\xde\xf45=8|.;s'
+stp(client): received: b'<user_denied>'
+stp(client): connection shutdown
+stp(client): socket closed
+
 End of task1 Testing
 ----------------------------------------
 ----------------------------------------
 Start of task2 Testing
 
 stp(client): socket created
-stp(client): connect fatal error
-stp(client): socket closed
 stp(client): encrypting: ZluVHtb5xho27YR
-stp(client): Exception2: [Errno 9] Bad file descriptor
-stp(client): socket created
-stp(client): connect fatal error
+stp(client): sent: b'\xb6\x82\x90\x8d\xf5O\xd7\x82H\x15\xcf\xc7lU\x84\x00\x06=\x00kQ\xcf\xec\x98\xcc\xee\xba\xd4L\xf0\xf7P\xa2\x95_\xe3y{\x93\x17>\xc9\x17\x12\xe5\x12}$\xf9\xe7 \x88\x94\x1d-\x8d\x84\xe3\x96\x9c\xfb\xbdw\xae\x9d#\xf8M\xc7\x05\xd9~\x15\x15\xa3]\xca\xd2\x96\xfe\x02(\x81\x9e*#\t\n\xfav+F)\xe9m$\x1dy\x98\xf73\x8e\xb1\xb1\xd2\xcb\xba^\xbaU\xb7\xcb \xa5\xdb\xd1\xd2\x1b\x04\x88\x1b\xf2\x95\xa1\x87|\x0f\x0e'
+stp(client): received: b'<user_authen>'
+stp(client): encrypting: b'FNbuSJ30yFe7YuV0xw9CNH7gKkXNrYBtWToKF8gSY6E='
+stp(client): sent: b'\x9e\x8f\x1c\n\x84t\x8cVCw\x068\xea\xb0\xb9\xec\xe0t5\x06@\xba\xcb.\x9c\x9e\xab\x9a\xa86\xb9U=\x8dh\xdd{\xc0=\x8f\x98\xc4\xc7o\x16\xf9\x99\x93\r\xe0\xba\xf9]\x80\x96\x0c\xe6g\x1c\x0c\x9a?\x18 d\xe4\xd2[G\x19}\x9a\xb3^N\xe5wU7?\\k\x14\x82\t\xf7K \x92\x05[~\xb7Z\x85\x08\x0c<\x87X\x12\xc7E\xc1\xb4\xe8\xdb\x91\xa2 M\xa0\x89\xd4\x0c/\\\xe4.\x93\x7fI)A\x15\xb6\n\xc6'
+stp(client): received: b'gAAAAABlq-fEfn2qJX3cJMYsGbmUH_-FRtxoTSADj6Wd5ok9QhPXD39J8v3I2s_Mb8e6HpcYIXSvyNJN1sVlJgKRh9dDyoVB8w=='
+stp(client): decrypted: b'<key_received>'
+stp(client): encrypting: tricky!
+stp(client): sent: b'gAAAAABlq-fEcnMaZ7ghNjNVUVhtodMruokAhg3hvHLA4A9hoB6FQkwjnojQa4GkVSCkzp10WLB0zOiCVZayPmfvWfHwQPSz3g=='
+stp(client): encrypting: <config_done>
+stp(client): sent: b'gAAAAABlq-fE23_x9saKt6BvwnUmeJcdUke387GwCGUG8fPbl8dIbb7hHe-I4IXjZX81CgeKSZImkp3CblyNFs2J_Su2jZzmvQ=='
+stp(client): received: gAAAAABlq-fE_MsFUy201EA2TrDsooAMPGzqWYXWv9RWUtKbgdioiu2BurwlOi4V13ETQhC7PFfvqMImqak5kjD5DIf3L5Etrg==
+stp(client): decrypted: b'#10:BAD_CMD#'
+stp(client): connection shutdown
 stp(client): socket closed
+
+stp(client): socket created
 stp(client): encrypting: YnM6W2STH8JuFs2
-stp(client): Exception2: [Errno 9] Bad file descriptor
-stp(client): socket created
-stp(client): connect fatal error
+stp(client): sent: b"\xa7\xca\xf9S\xf4\xe9E\xfff\xfa\xf4\xe4]\x02\xaa\x93\x97O\x1c\xb5a\xb0\xac\xe7k^E\xd0\xa5gz<g\x02\xb6\x0bs>,\x13\x7f\x18\xbem6'\xeev\xce\xf4\xf6\xc29\x11S\xc1\x0b\xb2\x99g,_vN \x96o\xef\x87\x9f\xc8\t\x93\xd7_\x18m\xaf\xa3\xe5%i|\xc30Q\xd0 3\x11\xc3\xda\x96BX\xa1\xeeQb\x02(;\xa6\xc3i\x13\x8f'\xed\x05\xa9\x819\xab,?\xeew[\xe6\xbc\xfb\x9a\x1c\xdf5\xd1\xbb"
+stp(client): received: b'<user_authen>'
+stp(client): encrypting: b'Tlt3p9fwDt90JOPsze8IASb49iJxAn7EFqbsfjMMC1c='
+stp(client): sent: b"y*X\xe5\xbf\x02\xe6\xb2\x90\xe1\xd7\xd5\xa0UE\xba\xe6f\xf4\xfa\xe7'\x06\x9b\x8c1\xc6g,\xe6\xd3\xcb\x12Iwf\x0e\xab\x88x\xa8M[e9\x00\x0e\x98\x07{\x18A\xed\xe2_OC\x1c\xc4\x1c\xa8twg\xff\xcdw\xa3s\xd0\xb2x\xbd\x1d7\x9d\xb2*\xf4\x11\xcd\x06\x1b\x7f\x01\xe7\x17\t\xae\xdf\x16\xa4\xfd?\xa1\x90\x0e\xa7\xb0\xe3*\x9e\x01Y\x03\xa2\xed(\xb6R/\xe9\xc1t\xdd\xc0R8\\\xb9\x9dq\xb3\xa8\xf3\xd8-\xad"
+stp(client): received: b'gAAAAABlq-fEC3LKAnOfNAVoQjwJCrHAGJTESQHtYmyHPZYMtaIfUCXTrf7fYztBZJDYOPD07IE-9IOpIMUwOVKBaGETBTWTCg=='
+stp(client): decrypted: b'<key_received>'
+stp(client): encrypting: $type:pic$
+stp(client): sent: b'gAAAAABlq-fENluVgDqhIN3zueVK9TmWxaDxz89Qc3qLJ7VEpoPoDZvRA2Lfe7irnx-NOKVqKiagnl81nrQAItTv0UaERNkasg=='
+stp(client): encrypting: (size:6501)
+stp(client): sent: b'gAAAAABlq-fEKcILgyGx9nYn05UDVvlLxBr2DF4lfyhe9k9oKGoK37xk-PZwnKB443Y18oq_Edzn-9qeTcZMGkDS6XxVNnDuZA=='
+stp(client): encrypting: $name:t2.txt$
+stp(client): sent: b'gAAAAABlq-fEyr7O5A2j618f3fVeQoRZZCvSyD1uGUzcKt441Pb7I8Z4OR8Y3quvEZoCqJbf3YV9ZMS1Y483hgvlGyMRXB9j0A=='
+stp(client): encrypting: <config_done>
+stp(client): sent: b'gAAAAABlq-fEBeg68Q8odFarw7ZqBEr4REwJ6bvoE1Tiy4zxoKCBX755dyNQUaN1dHY_U6VcGaJuENo8BnMsafWJA8sDsJEWoQ=='
+stp(client): received: gAAAAABlq-fEwR9MKwNx_5d48kBdNRV6hZv1Degqgf7xdNZ2rjxq4v3EXKzN0Y4EQOSo6X_7LMVZZ3gH1Yb0lvDgSiCKvB-boQ==
+stp(client): decrypted: b'#10:BAD_CMD#'
+stp(client): connection shutdown
 stp(client): socket closed
+
+stp(client): socket created
 stp(client): encrypting: GcD3VxLSBF9ZRNR
-stp(client): Exception2: [Errno 9] Bad file descriptor
-stp(client): socket created
-stp(client): connect fatal error
+stp(client): sent: b"[\xc0\r\xcc&\x07\xae\xc9\xf3<\x15\xa0\x15,\xfc\xfa\xe79\x06\xfc\xc2\xed)\r\x1c\xfc\x18E\xd5\xf7)\xef\xd2Jt\xcd\t\xdd\xe8\xb7\x89&\xb8#\xde\x91\x9d(<3\xc8\x83\xf7[\xa5\xd8s\xb7*\x9e\xab\x00\x1f'Gy#U\x99\xf3P#\x81H3\xe2\x88\xaax}}\x84\xf3C\xdb9\xce{\x9b\xf1r\x1e!\x1b\x92%\xf0Ci\xb1\xa4\xfa\xae\x04\xdd9\xb8H$\x92co\x9cx^\xd4JA\xc6lv\x17\xeb\x88Z\xdc\xd5V"
+stp(client): received: b'<user_authen>'
+stp(client): encrypting: b'tVMIOt5h-ArjEnUMhdUQ4TjXGKYc-p5S7HKzNGkfkQo='
+stp(client): sent: b'+\xe8O\xdbH\xa2T\xece\x8fq\xe7z\x00\xca\x95\xfe<\xce\xac\t&\xcb\x18\x000\xaeO\x90\xfdiiS\x82\xdf\xc1}"!U\xd1%\xb1\xb8>\x1f\xe9\x9a\x18O\xbe\x93\xd8\xdaqK\x1e\x85\xd0\x16\xe2d\x8a\x89_*s\xb6\xa1\xa4\xdbC\xf4\xcfM`\x1dQ\xc3"0\xf9\x06\xdc\xc5?bP\x99\x9bJ\t\xf7\x06\x8a\xc4\xd1\x9d\x90YJ:\x02\x96\xff\x82\xb1\x05n\r\x9fWU\x17\x88\xf8\xf4#\xd9w\xa6zQ\xca\xb9\xad\xfb\xe0'
+stp(client): received: b'gAAAAABlq-fFA-gA4-OUBfr32GBQOM4zIdKPkvJJbog2gZDetZOiVERl-OROYdKXtJvQBQNUga8P27YLCCPhPnyYZEWXcNT0jA=='
+stp(client): decrypted: b'<key_received>'
+stp(client): encrypting: $size:-4$
+stp(client): sent: b'gAAAAABlq-fFFn4HaNsPXmOHImxy4o-9h_9o3445MOlqPxlgZrrpyW74h8aLPz1-H5qBbs-hyUugmJKNiteN0ZkXRrLRZkFs5A=='
+stp(client): encrypting: $name:f2.pdf$
+stp(client): sent: b'gAAAAABlq-fFENTUiZphewvgEejEUu9UcRS9nDI7EyuVZaF8KGvFuQ0SoJmZaqQQSbWOsryXGF6BKZR5bkqnHSActI4s-UyIXQ=='
+stp(client): encrypting: $type:text$
+stp(client): sent: b'gAAAAABlq-fF1rRbY_2XMnaJprmV5PjNe4Fd9bg-Xlw1PpHuVQx5rGZPDEumIx-WJjLX8PfuRpekI0jCTOIO5a9JDVm1OuvxZg=='
+stp(client): encrypting: <config_done>
+stp(client): sent: b'gAAAAABlq-fFnSLt-x1cHvPu1nM07XddVF06_scQ0-4h-dbw7dut-wzeGKAROvL5NzNTXzmRMT1cHdILkRzZ14z6yNS_O_OLUw=='
+stp(client): received: gAAAAABlq-fF5UwnpuoxdqceXfJ1eZX9_dzgcqLfkA87Pv4wuygbAov-UTN5bhbIZsukggFxQ8g3kEYnGJ_lDllDOxAYERAZuQ==
+stp(client): decrypted: b'#30:BAD_CONFIG#'
+stp(client): connection shutdown
 stp(client): socket closed
+
+stp(client): socket created
 stp(client): encrypting: eYeix4YwJPToq6T
-stp(client): Exception2: [Errno 9] Bad file descriptor
+stp(client): sent: b'zx\n!\xda4d\xc3\xb1\xc1\x82,\xb4\xed\x1eH\x95\x8c\xaa\x83\xa9\x1d\x9b,#\xcd\x00I\xfa\xffx\xb74"\x8eWV\xe6x\x96\xd0R\x1c[SK}\xef\xde^4b\xd3\xe0gz\x9e5\x0c\xcf4\xb6\xdfbb\xf7N\x9c\xe0d\xa3\t(\xec{5\x1c5\xb9\x8e8s\xe7\xa9\x8aM\xa0\xa80\xd3\xd5\xde\xf8\\\xfb\xb3\x88\xf1WG7T\x10\xee\xeb\xe5\xaeG\x93\xbb\x90\xeb\xf9\xa6\x1a\xf7\xc5qh\x18\xb4\x95I\x8e1\xe3\xd2\xbb'
+stp(client): received: b'<user_authen>'
+stp(client): encrypting: b'qUjuP_758hFzJzkP0CnqTegzQgvji5uDhQOvKEyBxn4='
+stp(client): sent: b'kW+\xd5\xc1\xcd\xff\xb3\x16\xf9\x1a\xef\xe6\r\xdb2\x1f\xff?\xaf\x8c\xc3\xc5y\xb3\xe7r\x8d2\x9a\xc4\x0f\xc6 \xf7e\x81\xe5rX\xce\x10\xe3\xc9\xddh\xe6\xb4 \xc4\x0f\xfc\xdf\x98\x13\xd7^\xd5b\xe5\xae\xc0\xb4\xd7\xdd\xe4\xa3\x00D\xad\x81\xc5\xd9p\xf5\xcf\x84\xe9\x86\xb2<3\x87<\xce\x89\xd2x\xb7\x11\xa3\xd5\xa2\xfe\xbbG\x88\x8d\xd7\xa2u\xa7\xa5\xe1\xe1\x9f\x01>h\x97l\xfb\x9aA\x96#\xd3<\r{\xb9\xb3\x94L\x00\xdb \xb0'
+stp(client): received: b'gAAAAABlq-fFNPaqiLNF2mVd1jEp0J1v6fEyIIGKqaP9wzKywaGUTcoA8n_aN8Echw_kZZomUK6Wxlm7H0-X_ATswBu5Jnt16A=='
+stp(client): decrypted: b'<key_received>'
+stp(client): encrypting: $size:441$
+stp(client): sent: b'gAAAAABlq-fFmVgiJxqCRe_400NEFjYR0si_xapo46oMtyo5W3EWcEBB1mQP2g5AJ5UcjA-xBlfdQRi5n4-Ewv65UK2kgyVBKQ=='
+stp(client): encrypting: $type:text$
+stp(client): sent: b'gAAAAABlq-fFzSXCQU7IJofCP-HwkrwLksCEredDxe03ugC-jywe_suNOi4qhciPcDlHWmK1BZjR-WKvuteD-uDXhKuVj3Z1oQ=='
+stp(client): encrypting: <config_done>
+stp(client): sent: b'gAAAAABlq-fFf90A31WkwXI9BbhceEBO-c_j6aMw5VqwepXE6Vb4Op1siy1cNw1fNHEIZ4OIB36aIlzMlXToAxLrYT8VyYi3TQ=='
+stp(client): received: gAAAAABlq-fFRQbMMbs11hT5Cv5xzj0AK5efz-p0szUqEgevnOhimUuZulv8LMWUOTnTS5X7WAJis-VaqkjOQnVgbvKcbc_-QQ==
+stp(client): decrypted: b'#20:CMD_MISS#'
+stp(client): connection shutdown
+stp(client): socket closed
+
 End of task2 Testing
 ----------------------------------------
 ----------------------------------------
 Start of task3 Testing
 
 stp(client): socket created
-stp(client): connect fatal error
-stp(client): socket closed
 stp(client): encrypting: GcD3VxLSBF9ZRNR
-stp(client): Exception2: [Errno 9] Bad file descriptor
+stp(client): sent: b'\xb2\xd7Q\x04\xb5=B\xc1\xc4\xc4u\xff\xf9\x1f\x03@\x10s%\xd2\xc0\xbc\x11\x88\xbdB/\x1a\x8a"/\x01\xc0\x81\x15\x96\x0fy,+_\x17cF\xce\x01\xd7Y\x9d\xa0\x90Q\r\x16\x1ctx\xfb\xf7\xe1OK\x06\x9b\xc1,w\x99\xd9\xa5\xd6\xf4\xfb`l\xfap\n\x8aA\x90\x89.\x9a\x9d,F\x14U\x19\xf6\xe4\xec\x88\xe8\x08PB\xe3\x1e\x0c|\xd4#\xee\x1bp(\xfeK\x1c\x19\xf9\xa9^0\xe6\x9a\xbd\xe0\x1c}W\x13\\\x9e\xbc\xa7'
+stp(client): received: b'<user_authen>'
+stp(client): encrypting: b'FNbuSJ30yFe7YuV0xw9CNH7gKkXNrYBtWToKF8gSY6E='
+stp(client): sent: b'/\xfeh^\x15E\x00\xfe\x0e\xf6\x8a\xfd@\x02l=\xc9ID\xbes\x04sryh^c\xb93\xb9O\xea\xa0R\xd5\xb3g\x08!%X\xfe\x1a-\x08U\xb83\xee\xf0\xfd\xc1\xaaik\x91\xf0P\xdaE\xab#<a\xb7\tL,\x87X\x08\xc6\x86!K\xbd\xe1=9\x06\xf6L*\x91\xc5\xa2\x85\xe7h\xc0\xdcX6\xcd\xa1\xe9W\x96G\xac\x12t=\xa8i\x92\xc0x\xd9P\xc0\xa6\xc81\xa7\xd5\xa6?\x0c\x81\xef$D%h\x82\x06'
+stp(client): received: b'gAAAAABlq-fFhSkG0gT323aBa4NfTmB_ztP78N1mxSq66nEpj5bY0B1B_pVXsunsR0-KNqO0KNVZ8bvPuHkuL2S0HHiLu2XFpA=='
+stp(client): decrypted: b'<key_received>'
+stp(client): encrypting: $type:text$
+stp(client): sent: b'gAAAAABlq-fFPctFHHKi8pw6Y-L4Xzqj1akgR1CBvn3wNcH0TieJ2sawFeYCyPQ3eVlrgC8KL9lOPt3qPTX7rmhf9zNbcx88ng=='
+stp(client): encrypting: $size:607$
+stp(client): sent: b'gAAAAABlq-fFMtx_tIR3UIww-hJTxwt-WVy5qeFiZTeerh1w6NTU0kyjOX4kRofOK82knZclDUs892oxDfXZWcz4nJQTAElyTQ=='
+stp(client): encrypting: $name:t1.txt$
+stp(client): sent: b'gAAAAABlq-fF5y-0AnienZvEqGTQaCQ8SRpX5LS3RCNBViiv047io5eAtKgFN5UkLe-mflNs0LUHsoe1CbwCOycKPIm9EaOA-A=='
+stp(client): encrypting: <config_done>
+stp(client): sent: b'gAAAAABlq-fFGZWY5MDcMn6nXkIzKBZNkl3z0gsqueln2eMwr7_-Bx_1qbjzU1xpoiIQ0zaWygihmsjx3-q1WHShp0OOYQRBFw=='
+stp(client): received: gAAAAABlq-fFz1AsbjUSTGE2QYpYuepbH0u26S-2_eYRYuW_INbPPtjSCRaxr3o1sRwPIfZFHHT1AwsjQq2L9p7EMblSfpg7SQ==
+stp(client): decrypted: b'<config_valid>'
+stp(client): uploading ...
+stp(client): sent: b'\xa9P9\xac,\x1d\xe6\xb78\xa8\xe8\xefE\x0e\xaer'
+stp(client): sent: b'Utilitatis causa amicitia est quaesita.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Collatio igitur ista te nihil i'
+stp(client): sent: b'uvat. Honesta oratio, Socratica, Platonis etiam. Primum in nostrane potestate est, quid meminerimus? Duo Reges: constructio inte'
+stp(client): sent: b'rrete. Quid, si etiam iucunda memoria est praeteritorum malorum? Si quidem, inquit, tollerem, sed relinquo. An nisi populari fam'
+stp(client): sent: b'a?\n\nQuamquam id quidem licebit iis existimare, qui legerint. Summum a vobis bonum voluptas dicitur. At hoc in eo M. Refert tamen'
+stp(client): sent: b', quo modo. Quid sequatur, quid repugnet, vident. Iam id ipsum absurdum, maximum malum neglegi.'
+stp(client): uploading complete
+stp(client): connection shutdown
+stp(client): socket closed
+
 End of task3 Testing
 ----------------------------------------
