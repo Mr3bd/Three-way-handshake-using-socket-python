@@ -138,24 +138,12 @@ def stp_server(filename, server_address, client_count):
         try:
             res = authenticate_client(filename, client_socket)
             if res:
-                try:
-                    data = client_socket.recv(BUFFER)
-                    write(filename, 'stp(server): received: {}'.format(str(data)))
-
-                    rsa_key = utilities.RSA.load_key('server', 'private')
-                    symm_key = utilities.RSA.decrypt(rsa_key, data)
-                    write(filename, 'stp(server): decrypted: {}'.format(symm_key))
-                    msg = '<key_received>'
-                    encrypted_msg = utilities.RSA.encrypt(symm_key, msg)
-                    write(filename, 'stp(server): encrypting: {}'.format(msg))
-
-                    client_socket.sendall(encrypted_msg)
-                    write(filename, 'stp(server): sent: {}'.format(encrypted_msg))
-
+                symm_key = get_symm_key(filename, client_socket)
+                if symm_key is not None:
                     handle_client(filename, client_socket, symm_key)
                     close_socket(filename, client_socket, 'server')
                     write(filename, '\n')
-                except:
+                else:
                     client_socket.shutdown(SHUT_RDWR)
                     client_socket.close()
                     write(filename, 'stp(server): socket closed\n\n')
@@ -189,7 +177,7 @@ def handle_client(filename, connection, symm_key):
     ---------------------------------------------------
     """
     try:
-        response, commands = receive_commands(filename, connection)
+        response, commands = receive_commands(filename, connection, symm_key)
 
         if response == '<config_valid>':
 
@@ -228,19 +216,24 @@ def receive_commands(outfile, connection, symm_key):
     try:
 
         received_commands = ''
-
+        key = utilities.Fernet(symm_key)
         while True:
             data = connection.recv(BUFFER).decode(ENCODING)
-            received_commands += data
+            write(outfile, 'stp(server): received: {}\n'.format(str(data)))
+            msg = key.decrypt(data)
+            write(outfile, 'stp(server): decrypted: {}\n'.format(msg))
+            received_commands += msg.decode(ENCODING)
             if '<config_done>' in received_commands:
                 break
         write(outfile, 'stp(server): received: {}\n'.format(received_commands))
         string_to_check = received_commands.replace('<config_done>', "")
         tup = validate_configuration(string_to_check)
         res = tup[0]
-        # print(res)
-        connection.sendall(res.encode(ENCODING))
-        write(outfile, 'stp(server): sent: {}\n'.format(res))
+
+        encrypted_msg = key.encrypt(res.encode(ENCODING))
+        write(outfile, 'stp(client): encrypting: {}\n'.format(res))
+        connection.sendall(encrypted_msg)
+        write(outfile, 'stp(client): sent: {}\n'.format(encrypted_msg))
         res_copy = res
         com_copy = received_commands
 
@@ -726,16 +719,18 @@ def send_symm_key(outfile, client_socket,symm_key):
     while True:
         try:
             data = client_socket.recv(BUFFER)
-            msg = utilities.RSA.decrypt(symm_key, data)
-
-            write(outfile, 'stp(client): received: {}\n'.format(msg))
-            if msg == '<key_received>':
-                result = True
-                break
-            else:
-                break
+            if len(data) > 0:
+                write(outfile, 'stp(client): received: {}\n'.format(str(data)))
+                fernet = utilities.Fernet(symm_key)
+                msg = fernet.decrypt(data)
+                write(outfile, 'stp(client): decrypted: {}\n'.format(msg))
+                if msg.decode(ENCODING) == '<key_received>':
+                    result = True
+                    break
+                else:
+                    break
         except Exception as e:
-            pass
+            break
     return result
 
 def connect_to_server(filename, sock, server, ):
@@ -785,14 +780,31 @@ def send_commands(outfile, client_socket, commands, symm_key):
                       return False
     ---------------------------------------------------
     """
+
+    # for command in commands:
+    #         encrypted_msg = symm_key.encrypt(command.encode(ENCODING))
+    #         write(outfile, 'stp(client): encrypting: {}\n'.format(command))
+    #         client_socket.sendall(encrypted_msg)
+    #         write(outfile, 'stp(client): sent: {}\n'.format(encrypted_msg))
+
+    key = utilities.Fernet(symm_key)
     try:
         for command in commands:
-            client_socket.sendall(command.encode(ENCODING))
-            write(outfile, 'stp(client): sent: {}\n'.format(command))
+            encrypted_msg = key.encrypt(command.encode(ENCODING))
+            write(outfile, 'stp(client): encrypting: {}\n'.format(command))
+            client_socket.sendall(encrypted_msg)
+            write(outfile, 'stp(client): sent: {}\n'.format(encrypted_msg))
+        # for command in commands:
+        #     write(outfile, 'stp(client): encrypting: ')
+        #     client_socket.sendall(command.encode(ENCODING))
+        #     write(outfile, 'stp(client): sent: {}\n'.format(command))
         # print('client sent all commands')
         completion_command = '<config_done>'
-        client_socket.sendall(completion_command.encode(ENCODING))
-        write(outfile, 'stp(client): sent: {}\n'.format(completion_command))
+        encrypted_msg = key.encrypt(completion_command.encode(ENCODING))
+        write(outfile, 'stp(client): encrypting: {}\n'.format(completion_command))
+
+        client_socket.sendall(encrypted_msg)
+        write(outfile, 'stp(client): sent: {}\n'.format(encrypted_msg))
 
         return True
 
@@ -804,7 +816,7 @@ def send_commands(outfile, client_socket, commands, symm_key):
 '____________________________________________________'
 
 
-def get_config_response(outfile, sock , symm_key):
+def get_config_response(outfile, sock, symm_key):
     """
     ----------------------------------------------------
     Parameters:   filename (str)
@@ -820,12 +832,16 @@ def get_config_response(outfile, sock , symm_key):
                       return empty string
     ---------------------------------------------------
     """
+    key = utilities.Fernet(symm_key)
     try:
+
         # print('wait to get response from server')
         response = sock.recv(BUFFER).decode(ENCODING)
-        # print('received response from server: {}'.format(response))
-        write(outfile, 'stp(client): received: {}\n'.format(response))
-        return response
+        write(outfile, 'stp(client): received: {}\n'.format(str(response)))
+        msg = key.decrypt(response)
+        write(outfile, 'stp(client): decrypted: {}\n'.format(msg))
+
+        return msg
 
     except Exception as e:
         write(outfile, f'stp(client): configuration receive error: {e}\n')
@@ -917,7 +933,7 @@ def login(outfile, client_socket,login_password):
         try:
             data = client_socket.recv(BUFFER)
             msg = data.decode(ENCODING)
-            write(outfile, 'stp(client): received: {}\n'.format(msg))
+            write(outfile, 'stp(client): received: {}\n'.format(data))
             if msg == '<user_authen>':
                 result = True
                 break
@@ -930,7 +946,7 @@ def login(outfile, client_socket,login_password):
 def authenticate_client(outfile, connection):
     try:
         data = connection.recv(BUFFER)
-        write(outfile, 'stp(server): received: {}'.format(str(data)))
+        write(outfile, 'stp(server): received: {}\n'.format(str(data)))
         rsa_key = utilities.RSA.load_key('server', 'private')
         password = utilities.RSA.decrypt(rsa_key, data)
 
@@ -939,7 +955,7 @@ def authenticate_client(outfile, connection):
                 block = password_file.read(48)
                 if not block:
                     out_msg = '<user_denied>'
-                    connection.send(out_msg.encode())
+                    connection.sendall(out_msg.encode())
                     write(outfile, 'stp(server): sent: <user_denied>\n')
                     break
 
@@ -949,12 +965,12 @@ def authenticate_client(outfile, connection):
 
                 if password_hash == login_pass:
                     out_msg = '<user_authen>'
-                    connection.send(out_msg.encode())
-                    write(outfile, 'stp(server): sent: <user_authen>\n')
+                    connection.sendall(out_msg.encode())
+                    write(outfile, 'stp(server): sent: {}\n'.format(out_msg))
                     return True
-        out_msg = '<user_denied>'
-        connection.send(out_msg.encode())
-        write(outfile, 'stp(server): sent: <user_denied>\n')
+        # out_msg = '<user_denied>'
+        # connection.sendall(out_msg.encode())
+        # write(outfile, 'stp(server): sent: {}\n'.format(out_msg))
         return False
     except Exception as e:
         print(e)
@@ -981,3 +997,28 @@ def valid_filename(filename):
     if filename.count('.') != 1:
         return False
     return True
+
+
+def get_symm_key(outfile, connection):
+    symm_key = None
+    while True:
+        try:
+            data = connection.recv(BUFFER)
+            if len(data) > 0:
+                write(outfile, 'stp(server): received: {}\n'.format(str(data)))
+                rsa_key = utilities.RSA.load_key('server', 'private')
+                symm_key = utilities.RSA.decrypt(rsa_key, data)
+                write(outfile, 'stp(server): decrypted: {}\n'.format(symm_key))
+                msg = '<key_received>'
+                write(outfile, 'stp(server): encrypting: {}\n'.format(msg))
+                fernet = utilities.Fernet(symm_key)
+                encrypted_msg = fernet.encrypt(msg.encode(ENCODING))
+                connection.sendall(encrypted_msg)
+                write(outfile, 'stp(server): sent: {}\n'.format(encrypted_msg))
+                break
+        except Exception as e:
+            connection.shutdown(SHUT_RDWR)
+            connection.close()
+            write(outfile, 'stp(server): socket closed\n\n')
+            break
+    return symm_key
