@@ -840,8 +840,8 @@ def get_config_response(outfile, sock, symm_key):
         write(outfile, 'stp(client): received: {}\n'.format(str(response)))
         msg = key.decrypt(response)
         write(outfile, 'stp(client): decrypted: {}\n'.format(msg))
-
-        return msg
+        print(msg.decode(ENCODING))
+        return msg.decode(ENCODING)
 
     except Exception as e:
         write(outfile, f'stp(client): configuration receive error: {e}\n')
@@ -873,9 +873,12 @@ def upload_file(out_filename, sock, commands):
     """
 
     f_name = get_parameter_value(commands, 'name')
-
+    print(f_name)
     try:
+        hash_digest = compute_file_hash(f_name)
+        print(hash_digest)
         write(out_filename, 'stp(client): uploading ...\n')
+
         dot_index = f_name.rfind(".")
         if dot_index != -1:
             file_extension = f_name[dot_index + 1:]
@@ -1022,3 +1025,15 @@ def get_symm_key(outfile, connection):
             write(outfile, 'stp(server): socket closed\n\n')
             break
     return symm_key
+
+
+def compute_file_hash(filename):
+    # Read the contents of the file and remove whitespace characters
+    with open(filename, 'rb') as file:
+        file_contents = file.read()
+        file_contents = file_contents.replace(b' ', b'').replace(b'\n', b'').replace(b'\r', b'')
+
+    # Compute the MD5 hash digest of the contents
+    md5_hash = md5(file_contents).digest()
+
+    return md5_hash
